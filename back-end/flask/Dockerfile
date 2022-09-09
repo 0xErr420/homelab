@@ -4,10 +4,10 @@ FROM python:3.10
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app 
-ADD . /app
+ADD . .
 
 # Install the dependencies
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # run the command to start uWSGI
 CMD [ "uwsgi", "flask/wsgi.ini" ]
