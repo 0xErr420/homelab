@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  flask:
+    build: ./flask # Where should it search for
+    container_name: flask
+    restart: always
+    environment:
+      - APP_NAME=MyFlaskApp
+    expose:
+      - 8080 # Expose port 8080 where wsgi listens (file `wsgi.ini`)
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80" # Map port 80 where nginx listens (file `nginx.conf`)
