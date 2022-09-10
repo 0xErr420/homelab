@@ -7,7 +7,11 @@ WORKDIR /app
 ADD . .
 
 # Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
+
+# Set working directory to flask/
+WORKDIR /app/flask
 
 # run the command to start uWSGI
-CMD [ "uwsgi", "flask/wsgi.ini" ]
+CMD [ "uwsgi", "uwsgi.ini" ]
