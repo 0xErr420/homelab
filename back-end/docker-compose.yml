@@ -2,17 +2,22 @@ version: "3.7"
 
 services:
   flask:
-    build: ./flask # Where should it search for
-    container_name: flask
+    build: ./flask # Where should it search for Dockerfile
+    container_name: dev-flask
+    volumes:
+      - /home/cold/dev/homelab-project/back-end/flask/flask/app/:/app/flask/app/ # Flask app
     restart: always
     environment:
-      - APP_NAME=MyFlaskApp
+      - APP_NAME=MyFlaskApp # I don't know what it is used for
     expose:
-      - 8080 # Expose port 8080 where wsgi listens (file `wsgi.ini`)
+      - 8080 # Expose port 8080 where wsgi listens (file `uwsgi.ini`)
 
   nginx:
     build: ./nginx
-    container_name: nginx
+    container_name: dev-nginx
+    volumes:
+      - /home/cold/dev/homelab-project/back-end/nginx/config/:/etc/nginx/conf.d/ # Nginx config file
+      - /home/cold/dev/homelab-project/front-end/static/:/usr/share/nginx/html/:ro # Static files (read only)
     restart: always
     ports:
       - "80:80" # Map port 80 where nginx listens (file `nginx.conf`)
