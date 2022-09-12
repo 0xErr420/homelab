@@ -3,15 +3,14 @@ FROM python:3.10
 # Set the working directory to app/
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app 
+# Copy the current directory into the container /app directory
 ADD . .
 
 # Install the dependencies
-# RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Set working directory to flask/
 WORKDIR /app/flask
 
-# run the command to start uWSGI
+# Run the command to start uWSGI
 CMD [ "uwsgi", "uwsgi.ini" ]
